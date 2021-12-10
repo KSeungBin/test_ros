@@ -34,10 +34,11 @@ def streamframe():
 
 def captureframe():
     global video_frame
-    cap = cv.VideoCapture(1)
+    cap = cv.VideoCapture(0)
     while cap.isOpened():
         ret, frame = cap.read()  # return, frame 2개가 날아옴
         # cv.imshow('webcam', frame)
+        frame = cv.rotate(frame, cv.ROTATE_180)
         video_frame = frame.copy()
         cv.waitKey(30)  # frame capture하는 시간을 넉넉히 주기(frame 횟수 제한)
         pass
