@@ -41,7 +41,7 @@ def captureframe():
         # cv.imshow('webcam', frame)
         # frame = cv.rotate(frame, cv.ROTATE_180)
         video_frame = frame.copy()
-        video_frame = np.array(np.rot90(video_frame, -1))
+        # video_frame = np.array(np.rot90(video_frame, -1))
         cv.waitKey(30)  # frame capture하는 시간을 넉넉히 주기(frame 횟수 제한)
         pass
     # return
