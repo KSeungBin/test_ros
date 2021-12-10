@@ -21,7 +21,7 @@ def encodeframe():
     
 
     while True:
-        ret, encoded_image = cv.imencode(video_frame) # 3차원 이미지를 네트워크에 실어 보내기 위해 flat한 일렬(byte)로 보냄
+        ret, encoded_image = cv.imencode('.jpg',video_frame) # 3차원 이미지를 네트워크에 실어 보내기 위해 flat한 일렬(byte)로 보냄
     # send streaming yield : 시간은 느리더라도, 브라우저로 갈 때 유실되지 않게 해줌
         yield(b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + bytearray(encoded_image) + b'\r\n')
     return
@@ -35,7 +35,7 @@ def streamframe():
 
 def captureframe():
     global video_frame
-    cap = cv.VideoCapture(1)
+    cap = cv.VideoCapture(0)
     while cap.isOpened():
         ret, frame = cap.read()  # return, frame 2개가 날아옴
         # cv.imshow('webcam', frame)
