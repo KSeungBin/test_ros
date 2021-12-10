@@ -1,5 +1,6 @@
 from flask import Flask
 from flask.wrappers import Response
+import numpy as np
 
 app = Flask(__name__)  
 
@@ -20,6 +21,7 @@ def encodeframe():
     
 
     while True:
+        video_frame = np.array(np.rot90(video_frame, -1))
         ret, encoded_image = cv.imencode('.jpg', video_frame) # 3차원 이미지를 네트워크에 실어 보내기 위해 flat한 일렬(byte)로 보냄
     # send streaming yield : 시간은 느리더라도, 브라우저로 갈 때 유실되지 않게 해줌
         yield(b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + bytearray(encoded_image) + b'\r\n')
@@ -38,7 +40,7 @@ def captureframe():
     while cap.isOpened():
         ret, frame = cap.read()  # return, frame 2개가 날아옴
         # cv.imshow('webcam', frame)
-        frame = cv.rotate(frame, cv.ROTATE_180)
+        # frame = cv.rotate(frame, cv.ROTATE_180)
         video_frame = frame.copy()
         cv.waitKey(30)  # frame capture하는 시간을 넉넉히 주기(frame 횟수 제한)
         pass
