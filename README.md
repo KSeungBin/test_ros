@@ -5,7 +5,7 @@
 test_algorithm.py : 기본 구성 이해 </br>
 test_algorithm01.py : 심화 이해  
 [this text](./project_desc/README.md)  
-
+<img src='https://github.com/KSeungBin/test_algorithm/blob/main/project_desc/How-to-Install-ROS-Noetic-on-Ubuntu-20.04.png' />
 
 
 
