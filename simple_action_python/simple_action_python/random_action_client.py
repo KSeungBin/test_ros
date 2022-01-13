@@ -1,19 +1,18 @@
 import rclpy
 from rclpy.action import ActionClient
 from rclpy.node import Node
+from basic_interface.action import Counter
 
-from action_tutorials_interfaces.action import Fibonacci
 
-
-class FibonacciActionClient(Node):
+class RandomActionClient(Node):
 
     def __init__(self):
-        super().__init__('fibonacci_action_client')
-        self._action_client = ActionClient(self, Fibonacci, 'fibonacci') # action name = fibonacci
+        super().__init__('random_action_client')
+        self._action_client = ActionClient(self, Counter, 'counter') # action name = fibonacci
 
     # 1번 : action client가 goal request(service) 요청
     def send_goal(self, order):
-        goal_msg = Fibonacci.Goal() # action file의 goal(목표) 생성
+        goal_msg = Counter.Goal() # action file의 goal(목표) 생성
         goal_msg.order = order   # order는 데이터를 담는 역할(10이 입력됨) , request시 사용할 데이터 지정
 
         self._action_client.wait_for_server()  # action server가 응답할 때까지 대기
@@ -34,20 +33,21 @@ class FibonacciActionClient(Node):
     # 5번
     def get_result_callback(self, future):
         result = future.result().result 
-        self.get_logger().info('Result: {0}'.format(result.sequence)) # 결과 출력 : 맨 마지막 결과는 service로 온다
-        rclpy.shutdown()
+        if result.multiple == 5:
+            self.get_logger().info('Result: {0}'.format(result.multiple)) # 결과 출력 : 맨 마지막 결과는 service로 온다
+            rclpy.shutdown()
 
 
     # 4번
     def feedback_callback(self, feedback_msg):
         feedback = feedback_msg.feedback
-        self.get_logger().info('Received feedback: {0}'.format(feedback.partial_sequence))  # feedback은 계속 topic으로 value 전달됨
+        self.get_logger().info('Received feedback: {0}'.format(feedback.remainder))  # feedback은 계속 topic으로 value 전달됨
 
 
 def main(args=None):
     rclpy.init(args=args)
-    action_client = FibonacciActionClient()
-    action_client.send_goal(10)
+    action_client = RandomActionClient()
+    action_client.send_goal(5)
     rclpy.spin(action_client)
 
 

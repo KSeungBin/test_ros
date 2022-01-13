@@ -22,6 +22,8 @@ setup(
         'console_scripts': [
             'fibonacci_action_server = simple_action_python.fibonacci_action_server:main',
             'fibonacci_action_client = simple_action_python.fibonacci_action_client:main',
+            'random_action_server = simple_action_python.random_action_server:main',
+            'random_action_client = simple_action_python.random_action_client:main',
         ],
     },
 )
