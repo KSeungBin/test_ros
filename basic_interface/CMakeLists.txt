@@ -39,6 +39,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "srv/MockSensorControl.srv"
   "srv/AddTwoFloats.srv"
   "action/Counter.action"
+  "srv/IsimpleLedControl.srv"
   DEPENDENCIES builtin_interfaces
   )
 ament_package()
