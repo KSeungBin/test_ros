@@ -1,0 +1,9 @@
+# 어떤 값을 어떤 메세지로 주고 받을 것인지
+
+# server가 받는 값 2개, 구분자 ---, response  : python type이 아님, standard message type
+int64 a
+int64 b
+---
+int64 result
+
+
