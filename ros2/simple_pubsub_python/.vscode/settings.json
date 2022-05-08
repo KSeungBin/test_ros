@@ -1,0 +1,8 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/ubuntu/Develops/ros1/turtlebot_ws/devel/lib/python3/dist-packages",
+        "/home/ubuntu/Develops/ros1/test_ws/devel/lib/python3/dist-packages",
+        "/home/ubuntu/dev_ws/install/simple_pubsub_python/lib/python3.8/site-packages",
+        "/opt/ros/foxy/lib/python3.8/site-packages"
+    ]
+}
